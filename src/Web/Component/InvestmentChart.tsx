@@ -13,6 +13,14 @@ const InvestmentChart: React.FC<Props> = ({
   const chartContainer = useRef<HTMLCanvasElement | null>(null);
   const chartInstance = useRef<Chart | null>(null);
 
+  // formatting numbers according to indian number system
+  const finalAmountsFormatted = finalAmounts.map((value) =>
+    value.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+  );
+  const investedAmountsFormatted = investedAmounts.map((value) =>
+    value.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+  );
+
   useEffect(() => {
     if (chartContainer.current) {
       const ctx = chartContainer.current.getContext("2d");
@@ -23,7 +31,7 @@ const InvestmentChart: React.FC<Props> = ({
         chartInstance.current = new Chart(ctx, {
           type: "line",
           data: {
-            labels: finalAmounts.map((_, index) => index.toString()),
+            labels: finalAmounts.map((_, index) => (index + 1).toString()),
             datasets: [
               {
                 label: "Invested Amount",
@@ -63,7 +71,7 @@ const InvestmentChart: React.FC<Props> = ({
         });
       }
     }
-  }, [finalAmounts, investedAmounts]);
+  }, [finalAmountsFormatted, investedAmountsFormatted]);
 
   return (
     <div className="container mt-5">

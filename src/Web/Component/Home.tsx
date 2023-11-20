@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InvestmentChart from "./InvestmentChart";
-import Form from "./Form";
+//import Form from "./Form";
+import SentenceForm from "./SentenceForm";
 
 const Home: React.FC = () => {
   const [finalAmounts, setFinalAmounts] = useState<number[]>([]);
@@ -14,7 +15,7 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <Form updateValues={updateValues} />
+      <SentenceForm updateValues={updateValues} />
       <InvestmentChart
         finalAmounts={finalAmounts}
         investedAmounts={investedAmounts}
